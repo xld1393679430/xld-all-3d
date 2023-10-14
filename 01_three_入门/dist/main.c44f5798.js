@@ -36558,10 +36558,42 @@ if (typeof window !== 'undefined') {
 },{}],"main/index.js":[function(require,module,exports) {
 "use strict";
 
-var THREE = _interopRequireWildcard(require("three"));
+var Three = _interopRequireWildcard(require("three"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-console.log(THREE, 22222);
+// 1，创建场景
+var scene = new Three.Scene();
+
+// 2，创建相机
+// 参数。 1，角度 75。 2，宽高比。 3，近端。4，远端
+var camera = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+// 相机设置位置
+camera.position.set(0, 0, 10);
+
+// // 相机添加到场景中
+scene.add(camera);
+
+// // 添加物体 创建几何体
+var cubeGeometry = new Three.BoxGeometry(1, 1, 1);
+// // 物体材质
+var cbueMaterial = new Three.MeshBasicMaterial({
+  color: 0xffff00
+});
+// // 根据几何体和材质创建物体
+var cube = new Three.Mesh(cubeGeometry, cbueMaterial);
+
+// // 将几何体添加到场景中
+scene.add(cube);
+
+// // 初筛话渲染器
+var renderer = new Three.WebGLRenderer();
+// // 设置渲染的尺寸大小
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// // 使用渲染器，通过相机将场景渲染出来
+renderer.render(scene, camera);
 },{"three":"../node_modules/three/build/three.module.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
